@@ -1,0 +1,1095 @@
+/* ============================================================
+   ROYAL HAYAT PERFUMES — royal ivory & gold stylesheet
+   Light, warm, luxurious — like the boutique interior.
+   Mobile-first.
+   ============================================================ */
+
+/* ---------- tokens ---------- */
+:root {
+  --bg:          #f8f3e9;   /* warm ivory */
+  --bg-deep:     #f1e9d8;   /* deeper cream */
+  --panel:       #fffdf7;   /* card surfaces */
+  --gold:        #b08a45;   /* readable gold on light */
+  --gold-bright: #c9a15a;
+  --ink:         #2a2115;   /* headings */
+  --text:        #55482f;   /* body */
+  --muted:       #8d7d5f;
+
+  --line:        rgba(176, 138, 69, 0.45);
+  --line-dim:    rgba(176, 138, 69, 0.22);
+
+  --shadow: 0 18px 40px -18px rgba(74, 56, 25, 0.28);
+
+  --display: "Cinzel", "Georgia", serif;
+  --serif:   "Cormorant", "Georgia", serif;
+  --sans:    "Poppins", "Segoe UI", Arial, sans-serif;
+  --script:  "Great Vibes", cursive;
+
+  --gutter: clamp(1.4rem, 5vw, 4rem);
+  --section-gap: clamp(5rem, 12vw, 9rem);
+  --radius: 14px;
+  --content: 72rem;
+
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ---------- reset ---------- */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  overflow-x: clip;
+}
+
+body {
+  font-family: var(--sans);
+  font-weight: 300;
+  font-size: 1rem;
+  line-height: 1.75;
+  color: var(--text);
+  background: var(--bg);
+  overflow-x: hidden;
+}
+
+img, svg { display: block; max-width: 100%; }
+img { height: auto; }
+a { color: inherit; text-decoration: none; }
+ul, ol { list-style: none; }
+em { font-style: normal; }
+button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+iframe { display: block; }
+
+::selection { background: var(--gold); color: var(--panel); }
+:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ============================================================
+   ORNAMENT SYSTEM
+   ============================================================ */
+
+/* gold letterspaced label with trailing diamond + line */
+.label {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 1.4rem;
+}
+.label::before {
+  content: "";
+  order: 2;
+  flex: none;
+  width: 5px;
+  height: 5px;
+  background: var(--gold);
+  transform: rotate(45deg);
+}
+.label::after {
+  content: "";
+  order: 3;
+  flex: none;
+  width: 2.4rem;
+  height: 1px;
+  background: var(--line);
+}
+.label--center { justify-content: center; }
+
+/* line ◆ line divider */
+.orn {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  margin: 1.4rem 0;
+}
+.orn span { width: 2.6rem; height: 1px; background: var(--line); }
+.orn i {
+  width: 6px;
+  height: 6px;
+  background: var(--gold);
+  transform: rotate(45deg);
+}
+.orn--center { justify-content: center; }
+
+/* display heading */
+.h-display {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: clamp(2.1rem, 8vw, 3.6rem);
+  line-height: 1.15;
+  color: var(--ink);
+  letter-spacing: 0.01em;
+}
+.h-display em { color: var(--gold); }
+
+/* section head (centered) */
+.section-head {
+  max-width: 34rem;
+  margin: 0 auto clamp(2.8rem, 7vw, 4.5rem);
+  padding: 0 var(--gutter);
+  text-align: center;
+}
+.section-head__note {
+  margin-top: 1.4rem;
+  font-size: 0.92rem;
+  color: var(--text);
+}
+
+/* circular gold icon ring */
+.icon-ring {
+  display: grid;
+  place-items: center;
+  width: 5.2rem;
+  height: 5.2rem;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  color: var(--gold);
+  background:
+    radial-gradient(circle at 50% 30%, rgba(201, 161, 90, 0.14), transparent 70%),
+    var(--panel);
+}
+.icon-ring svg { width: 2.1rem; height: 2.1rem; }
+.icon-ring--sm { width: 4.2rem; height: 4.2rem; }
+.icon-ring--sm svg { width: 1.7rem; height: 1.7rem; }
+.icon-ring--plain { border-radius: var(--radius); }
+
+/* buttons — consistent height & centering everywhere */
+.btn-gold, .btn-outline, .btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  min-height: 3.1rem;
+  padding: 0 1.8rem;
+  border-radius: 8px;
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  text-align: center;
+  line-height: 1.4;
+}
+.btn-gold {
+  background: linear-gradient(180deg, var(--gold-bright), var(--gold));
+  color: #fffaf0;
+  box-shadow: 0 10px 22px -10px rgba(176, 138, 69, 0.55);
+  transition: filter 0.3s ease, transform 0.3s var(--ease-out);
+}
+.btn-gold:hover { filter: brightness(1.07); transform: translateY(-1px); }
+
+.btn-outline {
+  border: 1px solid var(--gold);
+  color: var(--gold);
+  font-weight: 500;
+  background: transparent;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+.btn-outline:hover { background: var(--gold); color: #fffaf0; }
+
+/* translucent button for use over photography */
+.btn-ghost {
+  border: 1px solid rgba(247, 239, 221, 0.55);
+  color: #f7efdd;
+  font-weight: 500;
+  background: rgba(22, 16, 9, 0.28);
+  backdrop-filter: blur(5px);
+  transition: background 0.3s ease, border-color 0.3s ease;
+}
+.btn-ghost:hover { background: rgba(22, 16, 9, 0.5); border-color: #f7efdd; }
+
+.link-gold {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.4rem;
+  color: var(--gold);
+  font-size: 0.74rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--line);
+  transition: color 0.3s ease, border-color 0.3s ease;
+}
+.link-gold:hover { color: var(--ink); border-color: var(--gold); }
+
+.body-copy {
+  font-size: 0.95rem;
+  line-height: 1.9;
+  color: var(--text);
+}
+.body-copy + .body-copy { margin-top: 1.2rem; }
+
+.signature {
+  margin-top: 1.8rem;
+  font-family: var(--script);
+  font-size: clamp(1.9rem, 6vw, 2.6rem);
+  color: var(--gold);
+  line-height: 1.2;
+}
+
+/* ============================================================
+   REVEAL MOTION
+   ============================================================ */
+.reveal {
+  opacity: 0;
+  transform: translateY(2rem);
+  transition: opacity 1s var(--ease-out), transform 1s var(--ease-out);
+}
+.reveal.is-in { opacity: 1; transform: none; }
+
+[data-parallax] { will-change: transform; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal { opacity: 1; transform: none; transition: none; }
+  * { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
+}
+
+/* ============================================================
+   HEADER — adapts: light over the hero photo, dark on scroll
+   (nav lives OUTSIDE the header so backdrop-filter can't clip it)
+   ============================================================ */
+.site-header {
+  --hd-ink: #f7efdd;
+  --hd-accent: #e6c68c;
+  --hd-border: rgba(247, 239, 221, 0.45);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 110;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.9rem var(--gutter);
+  transition: background 0.5s ease, box-shadow 0.5s ease;
+}
+.site-header.is-scrolled,
+body.nav-open .site-header {
+  --hd-ink: #2a2115;
+  --hd-accent: #b08a45;
+  --hd-border: rgba(176, 138, 69, 0.45);
+}
+.site-header.is-scrolled {
+  background: rgba(248, 243, 233, 0.9);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 1px 0 var(--line-dim);
+}
+body.nav-open .site-header {
+  background: transparent;
+  backdrop-filter: none;
+  box-shadow: none;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+.brand__mark {
+  width: 2.1rem;
+  /* the logo art is gold-on-transparent; a soft glow keeps it visible over photos */
+  filter: drop-shadow(0 1px 6px rgba(22, 16, 9, 0.35));
+}
+.site-header.is-scrolled .brand__mark,
+body.nav-open .brand__mark { filter: none; }
+.brand__text { line-height: 1.3; }
+.brand__name {
+  display: block;
+  font-family: var(--display);
+  font-size: 0.98rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--hd-ink);
+  transition: color 0.4s ease;
+}
+.brand__sub {
+  display: block;
+  font-size: 0.52rem;
+  font-weight: 400;
+  letter-spacing: 0.55em;
+  text-transform: uppercase;
+  color: var(--hd-accent);
+  transition: color 0.4s ease;
+}
+
+/* round hamburger */
+.nav-toggle {
+  display: grid;
+  place-items: center;
+  width: 3.1rem;
+  height: 3.1rem;
+  border: 1px solid var(--hd-border);
+  border-radius: 50%;
+  background: transparent;
+  transition: background 0.3s ease, border-color 0.4s ease;
+}
+.site-header.is-scrolled .nav-toggle,
+body.nav-open .nav-toggle { background: var(--panel); }
+.nav-toggle:hover { background: rgba(248, 243, 233, 0.18); }
+.site-header.is-scrolled .nav-toggle:hover,
+body.nav-open .nav-toggle:hover { background: var(--bg-deep); }
+.nav-toggle__bar {
+  display: block;
+  width: 1.15rem;
+  height: 1.5px;
+  background: var(--hd-accent);
+  margin: 2.5px 0;
+  transition: transform 0.45s var(--ease-out), opacity 0.3s ease, background 0.4s ease;
+}
+body.nav-open .nav-toggle__bar:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+body.nav-open .nav-toggle__bar:nth-child(2) { opacity: 0; }
+body.nav-open .nav-toggle__bar:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+/* fullscreen menu — warm ivory, gold ornament */
+.site-nav {
+  position: fixed;
+  inset: 0;
+  z-index: 105;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: var(--gutter);
+  background:
+    radial-gradient(110% 80% at 82% 8%, rgba(201, 161, 90, 0.16), transparent 55%),
+    var(--bg-deep);
+  clip-path: inset(0 0 100% 0);
+  visibility: hidden;
+  transition: clip-path 0.8s var(--ease-out), visibility 0s 0.8s;
+}
+body.nav-open .site-nav {
+  clip-path: inset(0 0 0 0);
+  visibility: visible;
+  transition: clip-path 0.8s var(--ease-out), visibility 0s;
+}
+body.nav-open { overflow: hidden; }
+
+.site-nav ul { display: grid; gap: 0.55rem; }
+.site-nav ul a {
+  display: flex;
+  align-items: baseline;
+  gap: 1.1rem;
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: clamp(2.1rem, 8vw, 3.8rem);
+  line-height: 1.25;
+  color: var(--ink);
+  opacity: 0;
+  transform: translateY(1.5rem);
+  transition: opacity 0.3s ease, transform 0.6s var(--ease-out), color 0.3s ease;
+}
+body.nav-open .site-nav ul a { opacity: 1; transform: none; }
+body.nav-open .site-nav li:nth-child(1) a { transition-delay: 0.22s; }
+body.nav-open .site-nav li:nth-child(2) a { transition-delay: 0.30s; }
+body.nav-open .site-nav li:nth-child(3) a { transition-delay: 0.38s; }
+body.nav-open .site-nav li:nth-child(4) a { transition-delay: 0.46s; }
+body.nav-open .site-nav li:nth-child(5) a { transition-delay: 0.54s; }
+.site-nav ul a:hover { color: var(--gold); }
+
+.nav-index {
+  font-family: var(--sans);
+  font-size: 0.66rem;
+  font-weight: 500;
+  letter-spacing: 0.24em;
+  color: var(--gold);
+}
+
+.site-nav__foot {
+  margin-top: 3rem;
+  font-size: 0.68rem;
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ============================================================
+   HERO — the campaign photograph IS the hero.
+   Mobile crops to the calligraphy wordmark; desktop shows
+   the full poster. Buttons sit on a scrim at the bottom.
+   ============================================================ */
+.hero {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 0 var(--gutter) clamp(5.5rem, 12vh, 8rem);
+  background: url("../assets/rhero.png") 46.5% center / cover no-repeat #16120e;
+}
+/* top scrim — keeps the header legible over the photo */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 9rem;
+  background: linear-gradient(180deg, rgba(16, 12, 7, 0.5), transparent);
+  pointer-events: none;
+}
+/* bottom scrim — grounds the kicker and buttons */
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 15rem;
+  background: linear-gradient(0deg, rgba(16, 12, 7, 0.72), transparent);
+  pointer-events: none;
+}
+
+.hero__content {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  justify-items: center;
+  text-align: center;
+}
+.hero__kicker {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: #e6c68c;
+  margin-bottom: 1.5rem;
+}
+.hero__kicker::before,
+.hero__kicker::after {
+  content: "";
+  width: 5px;
+  height: 5px;
+  background: #e6c68c;
+  transform: rotate(45deg);
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.9rem 1.1rem;
+}
+
+@media (min-width: 48rem) {
+  .hero { background-position: center; }
+}
+
+/* feature strip floating over the hero seam */
+.features {
+  position: relative;
+  z-index: 5;
+  padding: 0 var(--gutter);
+}
+.features__card {
+  max-width: 52rem;
+  margin: -2.8rem auto 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.6rem 1rem;
+  padding: 1.7rem 1.4rem;
+  background: var(--panel);
+  border: 1px solid var(--line-dim);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+.features__card li {
+  display: grid;
+  justify-items: center;
+  align-content: start;
+  gap: 0.7rem;
+  text-align: center;
+}
+.features__card svg { width: 1.9rem; height: 1.9rem; color: var(--gold); }
+.features__card span {
+  font-size: 0.64rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink);
+  line-height: 1.8;
+}
+
+/* ============================================================
+   ABOUT
+   ============================================================ */
+.about {
+  max-width: var(--content);
+  margin: 0 auto;
+  padding: var(--section-gap) var(--gutter) 0;
+  display: grid;
+  gap: 3rem;
+}
+.about__media {
+  display: grid;
+  justify-items: center;   /* keeps the arch centred at every width */
+}
+.arch {
+  width: min(100%, 24rem);
+  padding: 0.7rem;
+  border: 1px solid var(--line);
+  border-radius: 999px 999px var(--radius) var(--radius);
+  background: var(--panel);
+  box-shadow: var(--shadow);
+}
+.arch img {
+  width: 100%;
+  aspect-ratio: 3 / 3.8;
+  object-fit: cover;
+  border-radius: 999px 999px calc(var(--radius) - 7px) calc(var(--radius) - 7px);
+}
+.about .label { margin-bottom: 1.2rem; }
+.about__text .orn { margin: 1.6rem 0 1.8rem; }
+
+/* ============================================================
+   PROMISE / CRAFT ICON GRIDS
+   ============================================================ */
+.promise, .craft, .gallery, .reviews, .contact {
+  padding-top: var(--section-gap);
+}
+
+.promise__grid {
+  position: relative;
+  max-width: 46rem;
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.promise__item {
+  display: grid;
+  justify-items: center;
+  align-content: start;
+  gap: 1rem;
+  text-align: center;
+  padding: 1.8rem 0.9rem;
+}
+.promise__item:nth-child(odd)  { border-right: 1px solid var(--line-dim); }
+.promise__item:nth-child(-n+2) { border-bottom: 1px solid var(--line-dim); }
+.promise__grid::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 8px;
+  height: 8px;
+  background: var(--gold);
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+.promise__item h3 {
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold);
+  line-height: 1.9;
+}
+.promise__item p {
+  font-size: 0.86rem;
+  line-height: 1.85;
+  color: var(--text);
+  max-width: 26ch;
+}
+
+/* ============================================================
+   COLLECTIONS
+   ============================================================ */
+.collections { padding-top: var(--section-gap); }
+
+.collections__grid {
+  max-width: var(--content);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+  display: grid;
+  gap: 1.6rem;
+}
+
+.card {
+  background: var(--panel);
+  border: 1px solid var(--line-dim);
+  border-radius: var(--radius);
+  padding: 0.9rem 0.9rem 1.8rem;
+  box-shadow: var(--shadow);
+  transition: border-color 0.4s ease, transform 0.5s var(--ease-out);
+}
+.card:hover { border-color: var(--line); transform: translateY(-4px); }
+.card__media img {
+  width: 100%;
+  aspect-ratio: 4 / 4.4;
+  object-fit: cover;
+  border-radius: calc(var(--radius) - 6px);
+}
+.card__body { padding: 1.5rem 0.8rem 0; }
+.card__name {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 1.9rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+.card__orn {
+  display: block;
+  position: relative;
+  width: 2.4rem;
+  height: 1px;
+  background: var(--line);
+  margin: 0.9rem 0 1rem;
+}
+.card__orn::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 4px;
+  height: 4px;
+  background: var(--gold);
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+.card__tagline {
+  font-size: 0.95rem;
+  line-height: 1.8;
+  color: var(--text);
+  margin-bottom: 1rem;
+}
+.card .link-gold { min-height: 2.2rem; }
+
+/* customised perfume CTA */
+.signature-cta {
+  display: grid;
+  gap: 1.4rem;
+  justify-items: start;
+  background:
+    radial-gradient(100% 130% at 95% 10%, rgba(201, 161, 90, 0.14), transparent 55%),
+    var(--panel);
+  border: 1px solid var(--line-dim);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 2.2rem 1.8rem;
+  max-width: calc(var(--content) - 2 * var(--gutter));
+  width: calc(100% - 2 * var(--gutter));
+  margin: clamp(2.5rem, 6vw, 4rem) auto 0;
+}
+.signature-cta__kicker {
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 0.5rem;
+}
+.signature-cta__title {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: clamp(1.7rem, 6vw, 2.3rem);
+  color: var(--ink);
+}
+.signature-cta__note {
+  margin: 0.7rem 0 1.4rem;
+  font-size: 0.88rem;
+  line-height: 1.85;
+  color: var(--text);
+  max-width: 46ch;
+}
+
+/* ============================================================
+   CRAFT + STORE
+   ============================================================ */
+.promise__grid--tight { max-width: 46rem; }
+
+.store-cta {
+  display: grid;
+  gap: 0;
+  overflow: hidden;
+  background: var(--panel);
+  border: 1px solid var(--line-dim);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  max-width: calc(var(--content) - 2 * var(--gutter));
+  width: calc(100% - 2 * var(--gutter));
+  margin: clamp(2.5rem, 6vw, 4rem) auto 0;
+}
+.store-cta__media { overflow: hidden; }
+.store-cta__media img {
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  object-position: center 62%;
+}
+.store-cta__text {
+  display: grid;
+  justify-items: start;
+  align-content: center;
+  padding: 2.2rem 1.8rem;
+}
+.store-cta__kicker {
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 0.4rem;
+}
+.store-cta__title {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: clamp(1.5rem, 5.5vw, 2.1rem);
+  color: var(--ink);
+}
+.store-cta__note {
+  margin: 0.6rem 0 1.5rem;
+  font-size: 0.88rem;
+  line-height: 1.85;
+  color: var(--text);
+  max-width: 42ch;
+}
+
+/* ============================================================
+   GALLERY — 1 wide interior + 4 boutique shots
+   ============================================================ */
+.gallery__grid {
+  max-width: var(--content);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+.gallery__item {
+  position: relative;
+  border-radius: calc(var(--radius) - 4px);
+  overflow: hidden;
+  aspect-ratio: 1 / 1;
+  border: 1px solid var(--line-dim);
+  background: var(--panel);
+  box-shadow: var(--shadow);
+}
+.gallery__item img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.8s var(--ease-out);
+}
+.gallery__item:hover img { transform: scale(1.045); }
+.gallery__item--tall {
+  grid-column: 1 / -1;
+  aspect-ratio: 16 / 11;
+}
+
+/* ============================================================
+   REVIEWS — viewport on top, controls centred below
+   ============================================================ */
+.reviews__slider {
+  max-width: 44rem;
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+.reviews__viewport { position: relative; min-height: 15rem; }
+
+.review {
+  position: absolute;
+  inset: 0;
+  display: none;
+  background: var(--panel);
+  border: 1px solid var(--line-dim);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 1.8rem 1.6rem;
+}
+.review.is-active { display: block; animation: review-in 0.7s var(--ease-out); }
+@keyframes review-in {
+  from { opacity: 0; transform: translateY(0.8rem); }
+  to   { opacity: 1; transform: none; }
+}
+.review__mark {
+  display: block;
+  font-family: var(--serif);
+  font-size: 3rem;
+  line-height: 0.6;
+  color: var(--gold);
+  margin-bottom: 0.9rem;
+}
+.review p {
+  font-size: 0.92rem;
+  line-height: 1.9;
+  color: var(--ink);
+}
+.review footer {
+  margin-top: 1.2rem;
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+.review__stars {
+  color: var(--gold);
+  letter-spacing: 0.2em;
+  margin-right: 0.5rem;
+}
+
+.reviews__controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.4rem;
+  margin-top: 1.6rem;
+}
+.reviews__arrow {
+  display: grid;
+  place-items: center;
+  width: 2.8rem;
+  height: 2.8rem;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: var(--panel);
+  color: var(--gold);
+  font-size: 1rem;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+.reviews__arrow:hover { background: var(--gold); color: #fffaf0; }
+
+.reviews__dots {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.reviews__dots button {
+  width: 1.4rem;
+  height: 3px;
+  border-radius: 2px;
+  background: var(--line-dim);
+  transition: background 0.3s ease, width 0.3s ease;
+}
+.reviews__dots button.is-active { background: var(--gold); width: 2.2rem; }
+
+/* ============================================================
+   CONTACT
+   ============================================================ */
+.contact__cards {
+  max-width: 46rem;
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+  display: grid;
+  gap: 1.1rem;
+}
+.contact-card {
+  display: flex;
+  align-items: center;
+  gap: 1.3rem;
+  background: var(--panel);
+  border: 1px solid var(--line-dim);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 1.4rem 1.5rem;
+}
+.contact-card .icon-ring--sm { flex: none; width: 3.6rem; height: 3.6rem; }
+.contact-card .icon-ring--sm svg { width: 1.5rem; height: 1.5rem; }
+.contact-card h3 {
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 0.35rem;
+}
+.contact-card__main {
+  font-size: 1.02rem;
+  font-weight: 400;
+  color: var(--ink);
+}
+.contact-card__main a:hover { color: var(--gold); }
+.contact-card__sub {
+  font-size: 0.82rem;
+  line-height: 1.8;
+  color: var(--muted);
+}
+.contact-card__now {
+  margin-top: 0.4rem;
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-variant-numeric: tabular-nums;
+}
+
+/* live Google Maps embed in a gold frame */
+.contact__map {
+  max-width: 46rem;
+  margin: 1.6rem auto 0;
+  padding: 0 var(--gutter);
+  text-align: center;
+}
+.map-embed {
+  padding: 0.6rem;
+  background: var(--panel);
+  border: 1px solid var(--line-dim);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+.map-embed iframe {
+  width: 100%;
+  height: clamp(300px, 60vw, 440px);
+  border: 0;
+  border-radius: calc(var(--radius) - 7px);
+}
+.contact__map-link {
+  display: inline-flex;
+  align-items: center;
+  margin-top: 1rem;
+  color: var(--gold);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 0.2rem;
+  transition: color 0.3s ease, border-color 0.3s ease;
+}
+.contact__map-link:hover { color: var(--ink); border-color: var(--gold); }
+
+/* connect */
+.connect {
+  max-width: 46rem;
+  margin: clamp(2.5rem, 6vw, 3.5rem) auto 0;
+  padding: 0 var(--gutter);
+  text-align: center;
+}
+.connect__label {
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin: 1rem 0 1.6rem;
+}
+.connect__row {
+  display: grid;
+  gap: 0.9rem;
+  border: 1px solid var(--line-dim);
+  border-radius: var(--radius);
+  padding: 1.4rem;
+  background: var(--panel);
+  box-shadow: var(--shadow);
+}
+.connect__row a {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  text-align: left;
+  transition: opacity 0.3s ease;
+}
+.connect__row a:hover { opacity: 0.75; }
+.connect__row .icon-ring--sm { flex: none; width: 3.2rem; height: 3.2rem; }
+.connect__row .icon-ring--sm svg { width: 1.35rem; height: 1.35rem; }
+.connect__name {
+  font-size: 0.74rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink);
+  line-height: 1.7;
+}
+.connect__name i {
+  display: block;
+  font-style: normal;
+  font-size: 0.68rem;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  text-transform: none;
+  color: var(--muted);
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.site-footer {
+  padding: var(--section-gap) var(--gutter) 2rem;
+}
+.site-footer__card {
+  max-width: 46rem;
+  margin: 0 auto;
+  border: 1px solid var(--line-dim);
+  border-radius: var(--radius);
+  background:
+    radial-gradient(120% 100% at 80% 100%, rgba(201, 161, 90, 0.12), transparent 55%),
+    var(--panel);
+  box-shadow: var(--shadow);
+  padding: clamp(2.5rem, 7vw, 4rem) 1.8rem 1.8rem;
+  text-align: center;
+}
+.site-footer__logo {
+  width: clamp(9rem, 26vw, 11rem);
+  margin: 0 auto;
+}
+.site-footer__tag {
+  margin-top: 1.8rem;
+  font-size: 0.9rem;
+  line-height: 1.9;
+  color: var(--text);
+}
+.site-footer__card .orn--center { margin: 1.8rem 0 1.4rem; }
+.site-footer__legal {
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+}
+
+/* ============================================================
+   DESKTOP — an expansion of the mobile experience
+   ============================================================ */
+@media (min-width: 40rem) {
+  .features__card { grid-template-columns: repeat(4, 1fr); }
+  .collections__grid { grid-template-columns: 1fr 1fr; }
+  .connect__row { grid-template-columns: repeat(3, 1fr); }
+  .contact__cards { grid-template-columns: 1fr 1fr; }
+  .store-cta { grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); }
+  .store-cta__media img { aspect-ratio: auto; }
+  .signature-cta {
+    grid-template-columns: auto 1fr;
+    column-gap: 1.8rem;
+    align-items: center;
+  }
+}
+
+@media (min-width: 60rem) {
+  .about {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+    align-items: center;
+    column-gap: clamp(3rem, 6vw, 5rem);
+  }
+
+  .promise__grid { padding: 0; }
+
+  /* gallery: tall 2×2 · two squares right · wide + square below */
+  .gallery__grid { grid-template-columns: repeat(3, 1fr); }
+  .gallery__item--tall {
+    grid-column: 1 / 3;
+    grid-row: 1 / 3;
+    aspect-ratio: auto;
+  }
+  .gallery__item--wide {
+    grid-column: span 2;
+    aspect-ratio: auto;
+  }
+
+  .contact__cards, .contact__map, .connect { max-width: 56rem; }
+}
