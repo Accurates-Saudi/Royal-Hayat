@@ -399,6 +399,7 @@ body.nav-open .site-nav li:nth-child(2) a { transition-delay: 0.30s; }
 body.nav-open .site-nav li:nth-child(3) a { transition-delay: 0.38s; }
 body.nav-open .site-nav li:nth-child(4) a { transition-delay: 0.46s; }
 body.nav-open .site-nav li:nth-child(5) a { transition-delay: 0.54s; }
+body.nav-open .site-nav li:nth-child(6) a { transition-delay: 0.62s; }
 .site-nav ul a:hover { color: var(--gold); }
 
 .nav-index {
@@ -671,42 +672,53 @@ body.nav-open .site-nav li:nth-child(5) a { transition-delay: 0.54s; }
 }
 .card .link-gold { min-height: 2.2rem; }
 
-/* customised perfume CTA */
-.signature-cta {
-  display: grid;
-  gap: 1.4rem;
-  justify-items: start;
-  background:
-    radial-gradient(100% 130% at 95% 10%, rgba(201, 161, 90, 0.14), transparent 55%),
-    var(--panel);
-  border: 1px solid var(--line-dim);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-  padding: 2.2rem 1.8rem;
-  max-width: calc(var(--content) - 2 * var(--gutter));
-  width: calc(100% - 2 * var(--gutter));
-  margin: clamp(2.5rem, 6vw, 4rem) auto 0;
+/* ============================================================
+   CUSTOMISED PERFUME — the house speciality.
+   Same ivory & gold language as every other section; a soft
+   deeper-cream band sets it apart without breaking the theme.
+   ============================================================ */
+.custom {
+  margin-top: var(--section-gap);
+  padding: clamp(4rem, 10vw, 7rem) var(--gutter);
+  background: var(--bg-deep);
+  border-top: 1px solid var(--line-dim);
+  border-bottom: 1px solid var(--line-dim);
 }
-.signature-cta__kicker {
-  font-size: 0.72rem;
+.custom .section-head { margin-bottom: clamp(2.4rem, 6vw, 3.5rem); }
+
+.custom__row {
+  max-width: 52rem;
+  margin: 0 auto;
+  display: grid;
+  gap: 2rem;
+}
+.custom__row li {
+  display: grid;
+  justify-items: center;
+  gap: 0.8rem;
+  text-align: center;
+}
+.custom__row h3 {
+  font-size: 0.76rem;
   font-weight: 500;
-  letter-spacing: 0.22em;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--gold);
-  margin-bottom: 0.5rem;
 }
-.signature-cta__title {
-  font-family: var(--serif);
-  font-weight: 500;
-  font-size: clamp(1.7rem, 6vw, 2.3rem);
-  color: var(--ink);
-}
-.signature-cta__note {
-  margin: 0.7rem 0 1.4rem;
-  font-size: 0.88rem;
+.custom__row p {
+  font-size: 0.86rem;
   line-height: 1.85;
   color: var(--text);
-  max-width: 46ch;
+  max-width: 26ch;
+}
+
+.custom__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.9rem 1.1rem;
+  margin-top: clamp(2.4rem, 6vw, 3.5rem);
 }
 
 /* ============================================================
@@ -804,17 +816,15 @@ body.nav-open .site-nav li:nth-child(5) a { transition-delay: 0.54s; }
   margin: 0 auto;
   padding: 0 var(--gutter);
 }
-.reviews__viewport { position: relative; min-height: 15rem; }
-
+/* slides sit in normal flow (display:none when inactive), so the
+   card always grows with its text — nothing can spill out */
 .review {
-  position: absolute;
-  inset: 0;
   display: none;
   background: var(--panel);
   border: 1px solid var(--line-dim);
   border-radius: var(--radius);
   box-shadow: var(--shadow);
-  padding: 1.8rem 1.6rem;
+  padding: 1.8rem 1.6rem 2rem;
 }
 .review.is-active { display: block; animation: review-in 0.7s var(--ease-out); }
 @keyframes review-in {
@@ -1063,10 +1073,10 @@ body.nav-open .site-nav li:nth-child(5) a { transition-delay: 0.54s; }
   .contact__cards { grid-template-columns: 1fr 1fr; }
   .store-cta { grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); }
   .store-cta__media img { aspect-ratio: auto; }
-  .signature-cta {
-    grid-template-columns: auto 1fr;
-    column-gap: 1.8rem;
-    align-items: center;
+  .custom__row { grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+  .custom__row li:nth-child(2) {
+    border-left: 1px solid var(--line-dim);
+    border-right: 1px solid var(--line-dim);
   }
 }
 
