@@ -62,15 +62,28 @@
       </span>
     </a>
 
+    <!-- inline links on desktop; the hamburger takes over on mobile -->
+    <nav class="header-nav" aria-label="Primary">
+      <a href="#about">About</a>
+      <a href="#collections">Collections</a>
+      <a href="#custom">Customised</a>
+      <a href="#craft">Craft</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#contact">Contact</a>
+    </nav>
+
     <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="siteNav" aria-label="Open menu">
-      <span class="nav-toggle__bar"></span>
-      <span class="nav-toggle__bar"></span>
-      <span class="nav-toggle__bar"></span>
+      <svg class="nav-toggle__icon nav-toggle__icon--menu" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M4.5 8h15M4.5 12h15M4.5 16h15" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+      <svg class="nav-toggle__icon nav-toggle__icon--close" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M7 7l10 10M17 7L7 17" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
     </button>
   </header>
 
-  <!-- fullscreen menu — sibling of the header so the header's blur can never clip it -->
-  <nav class="site-nav" id="siteNav" aria-label="Primary">
+  <!-- fullscreen menu (mobile) — sibling of the header so the header's blur can never clip it -->
+  <nav class="site-nav" id="siteNav" aria-label="Menu">
     <ul>
       <li><a href="#about"><span class="nav-index">01</span> About Us</a></li>
       <li><a href="#collections"><span class="nav-index">02</span> Collections</a></li>
@@ -364,6 +377,11 @@
       </aside>
     </section>
 
+    <!-- ============ IMAGE INTERLUDE — add assets/bg2.png to activate ============ -->
+    <section class="interlude" aria-label="Royal Hayat Perfumes">
+      <p class="interlude__line reveal">Fragrances that speak <em>elegance.</em></p>
+    </section>
+
     <!-- ============ GALLERY ============ -->
     <section class="gallery" id="gallery" aria-labelledby="gallery-title">
       <header class="section-head reveal">
@@ -426,9 +444,13 @@
         </div>
 
         <div class="reviews__controls">
-          <button class="reviews__arrow" data-review-prev aria-label="Previous review">←</button>
+          <button class="reviews__arrow" data-review-prev aria-label="Previous review">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 5.5 8 12l6.5 6.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
           <div class="reviews__dots" role="tablist" aria-label="Choose review"></div>
-          <button class="reviews__arrow" data-review-next aria-label="Next review">→</button>
+          <button class="reviews__arrow" data-review-next aria-label="Next review">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.5 5.5 16 12l-6.5 6.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
         </div>
       </div>
     </section>
@@ -463,6 +485,7 @@
           <div>
             <h3>Call us</h3>
             <p class="contact-card__main"><a href="tel:+919876543210">+91 81118 77768</a></p>
+            <p class="contact-card__main"><a href="tel:++918111877762">+91 81118 77762</a></p>
             <p class="contact-card__sub">Mon – Sat, 10:00 AM – 8:00 PM</p>
           </div>
         </li>

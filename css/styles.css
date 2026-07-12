@@ -8,6 +8,7 @@
 :root {
   --bg:          #f8f3e9;   /* warm ivory */
   --bg-deep:     #f1e9d8;   /* deeper cream */
+  --bg-sand:     #ecdfc3;   /* warm sand — strongest light band */
   --panel:       #fffdf7;   /* card surfaces */
   --gold:        #b08a45;   /* readable gold on light */
   --gold-bright: #c9a15a;
@@ -328,6 +329,41 @@ body.nav-open .brand__mark { filter: none; }
   transition: color 0.4s ease;
 }
 
+/* inline desktop nav — hidden on mobile, where the hamburger takes over */
+.header-nav { display: none; }
+@media (min-width: 60rem) {
+  .site-header .nav-toggle { display: none; }
+  .header-nav {
+    display: flex;
+    align-items: center;
+    gap: clamp(1.2rem, 2.5vw, 2.2rem);
+  }
+  .header-nav a {
+    position: relative;
+    padding: 0.4rem 0;
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--hd-ink);
+    transition: color 0.3s ease;
+  }
+  .header-nav a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 1px;
+    background: var(--hd-accent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.35s var(--ease-out);
+  }
+  .header-nav a:hover { color: var(--hd-accent); }
+  .header-nav a:hover::after { transform: scaleX(1); }
+}
+
 /* round hamburger */
 .nav-toggle {
   display: grid;
@@ -344,17 +380,16 @@ body.nav-open .nav-toggle { background: var(--panel); }
 .nav-toggle:hover { background: rgba(248, 243, 233, 0.18); }
 .site-header.is-scrolled .nav-toggle:hover,
 body.nav-open .nav-toggle:hover { background: var(--bg-deep); }
-.nav-toggle__bar {
-  display: block;
-  width: 1.15rem;
-  height: 1.5px;
-  background: var(--hd-accent);
-  margin: 2.5px 0;
-  transition: transform 0.45s var(--ease-out), opacity 0.3s ease, background 0.4s ease;
+.nav-toggle__icon {
+  grid-area: 1 / 1;   /* both icons share the same centred cell */
+  width: 1.3rem;
+  height: 1.3rem;
+  color: var(--hd-accent);
+  transition: opacity 0.3s ease, transform 0.4s var(--ease-out), color 0.4s ease;
 }
-body.nav-open .nav-toggle__bar:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
-body.nav-open .nav-toggle__bar:nth-child(2) { opacity: 0; }
-body.nav-open .nav-toggle__bar:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+.nav-toggle__icon--close { opacity: 0; transform: rotate(-45deg) scale(0.8); }
+body.nav-open .nav-toggle__icon--menu { opacity: 0; transform: rotate(45deg) scale(0.8); }
+body.nav-open .nav-toggle__icon--close { opacity: 1; transform: none; }
 
 /* fullscreen menu — warm ivory, gold ornament */
 .site-nav {
@@ -364,7 +399,8 @@ body.nav-open .nav-toggle__bar:nth-child(3) { transform: translateY(-6.5px) rota
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: var(--gutter);
+  padding: 5.5rem var(--gutter) 2.5rem;  /* clears the fixed header; scrolls on short screens */
+  overflow-y: auto;
   background:
     radial-gradient(110% 80% at 82% 8%, rgba(201, 161, 90, 0.16), transparent 55%),
     var(--bg-deep);
@@ -532,11 +568,26 @@ body.nav-open .site-nav li:nth-child(6) a { transition-delay: 0.62s; }
    ABOUT
    ============================================================ */
 .about {
+  position: relative;
+  z-index: 0;
   max-width: var(--content);
   margin: 0 auto;
   padding: var(--section-gap) var(--gutter) 0;
   display: grid;
   gap: 3rem;
+}
+/* ghost calligraphy watermark, bleeding off the right edge */
+.about::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: clamp(2rem, 8vw, 5rem);
+  right: -8%;
+  width: clamp(14rem, 32vw, 24rem);
+  aspect-ratio: 2 / 3;
+  background: url("../assets/logo royal hayat.png") center / contain no-repeat;
+  opacity: 0.05;
+  pointer-events: none;
 }
 .about__media {
   display: grid;
@@ -562,8 +613,17 @@ body.nav-open .site-nav li:nth-child(6) a { transition-delay: 0.62s; }
 /* ============================================================
    PROMISE / CRAFT ICON GRIDS
    ============================================================ */
-.promise, .craft, .gallery, .reviews, .contact {
+.craft, .gallery, .contact {
   padding-top: var(--section-gap);
+}
+
+/* promise sits on a deeper-cream band so sections alternate tones */
+.promise {
+  margin-top: var(--section-gap);
+  padding: clamp(4rem, 10vw, 7rem) 0;
+  background: var(--bg-deep);
+  border-top: 1px solid var(--line-dim);
+  border-bottom: 1px solid var(--line-dim);
 }
 
 .promise__grid {
@@ -680,11 +740,34 @@ body.nav-open .site-nav li:nth-child(6) a { transition-delay: 0.62s; }
 .custom {
   margin-top: var(--section-gap);
   padding: clamp(4rem, 10vw, 7rem) var(--gutter);
-  background: var(--bg-deep);
-  border-top: 1px solid var(--line-dim);
-  border-bottom: 1px solid var(--line-dim);
+  /* flat espresso — the same tone as the hero and photo-band overlays */
+  background: #1c1610;
 }
 .custom .section-head { margin-bottom: clamp(2.4rem, 6vw, 3.5rem); }
+
+/* light type + gold accents on the dark band */
+.custom .label { color: #e6c68c; }
+.custom .label::before { background: #e6c68c; }
+.custom .label::after { background: rgba(230, 198, 140, 0.5); }
+.custom .h-display { color: #f2e8d5; }
+.custom .h-display em { color: #d9b675; }
+.custom .orn span { background: rgba(230, 198, 140, 0.4); }
+.custom .orn i { background: #d9b675; }
+.custom .section-head__note { color: rgba(242, 232, 213, 0.75); }
+
+.custom .icon-ring {
+  border-color: rgba(230, 198, 140, 0.45);
+  color: #d9b675;
+  background: rgba(255, 253, 247, 0.04);
+}
+.custom .custom__row h3 { color: #d9b675; }
+.custom .custom__row p { color: rgba(242, 232, 213, 0.68); }
+
+.custom .btn-outline {
+  color: #d9b675;
+  border-color: rgba(217, 182, 117, 0.6);
+}
+.custom .btn-outline:hover { background: #d9b675; color: #241c10; }
 
 .custom__row {
   max-width: 52rem;
@@ -775,6 +858,37 @@ body.nav-open .site-nav li:nth-child(6) a { transition-delay: 0.62s; }
 }
 
 /* ============================================================
+   IMAGE INTERLUDE — full-bleed photo band, same idea as the
+   hero. Drop assets/bg2.png into the assets folder to fill it.
+   ============================================================ */
+.interlude {
+  margin-top: var(--section-gap);
+  min-height: clamp(16rem, 46vh, 26rem);
+  display: grid;
+  place-items: center;
+  padding: 3rem var(--gutter);
+  text-align: center;
+  background:
+    linear-gradient(rgba(22, 16, 9, 0.42), rgba(22, 16, 9, 0.42)),
+    url("../assets/bg2.png") center / cover no-repeat,
+    #1c1610;
+}
+.interlude__line {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(1.7rem, 5.5vw, 3rem);
+  line-height: 1.3;
+  color: #f2e8d5;
+  max-width: 22ch;
+}
+.interlude__line em { color: #d9b675; }
+
+@media (min-width: 60rem) {
+  /* gentle parallax feel on desktop only (mobile browsers handle `fixed` poorly) */
+  .interlude { background-attachment: scroll, fixed, scroll; }
+}
+
+/* ============================================================
    GALLERY — 1 wide interior + 4 boutique shots
    ============================================================ */
 .gallery__grid {
@@ -809,8 +923,32 @@ body.nav-open .site-nav li:nth-child(6) a { transition-delay: 0.62s; }
 }
 
 /* ============================================================
-   REVIEWS — viewport on top, controls centred below
+   REVIEWS — full-bleed photo band (assets/bg2.png), review
+   cards float on top like panels on the counter
    ============================================================ */
+.reviews {
+  margin-top: var(--section-gap);
+  padding: clamp(4rem, 10vw, 7rem) 0;
+  background:
+    linear-gradient(rgba(22, 16, 9, 0.6), rgba(22, 16, 9, 0.6)),
+    url("../assets/bg2.png") center / cover no-repeat,
+    #1c1610;
+}
+.reviews .section-head { margin-bottom: clamp(2.4rem, 6vw, 3.5rem); }
+
+/* light type over the photo */
+.reviews .label { color: #e6c68c; }
+.reviews .label::before { background: #e6c68c; }
+.reviews .label::after { background: rgba(230, 198, 140, 0.5); }
+.reviews .h-display { color: #f2e8d5; }
+
+.reviews .reviews__dots button { background: rgba(242, 232, 213, 0.28); }
+.reviews .reviews__dots button.is-active { background: #d9b675; }
+
+@media (min-width: 60rem) {
+  .reviews { background-attachment: scroll, fixed, scroll; }
+}
+
 .reviews__slider {
   max-width: 44rem;
   margin: 0 auto;
@@ -871,9 +1009,9 @@ body.nav-open .site-nav li:nth-child(6) a { transition-delay: 0.62s; }
   border-radius: 50%;
   background: var(--panel);
   color: var(--gold);
-  font-size: 1rem;
   transition: background 0.3s ease, color 0.3s ease;
 }
+.reviews__arrow svg { width: 1.1rem; height: 1.1rem; }
 .reviews__arrow:hover { background: var(--gold); color: #fffaf0; }
 
 .reviews__dots {
@@ -893,6 +1031,24 @@ body.nav-open .site-nav li:nth-child(6) a { transition-delay: 0.62s; }
 /* ============================================================
    CONTACT
    ============================================================ */
+.contact {
+  position: relative;
+  z-index: 0;
+}
+/* mirrored ghost watermark on the left */
+.contact::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: clamp(1rem, 5vw, 3rem);
+  left: -7%;
+  width: clamp(12rem, 28vw, 21rem);
+  aspect-ratio: 2 / 3;
+  background: url("../assets/logo royal hayat.png") center / contain no-repeat;
+  opacity: 0.045;
+  pointer-events: none;
+}
+
 .contact__cards {
   max-width: 46rem;
   margin: 0 auto;
@@ -1075,8 +1231,8 @@ body.nav-open .site-nav li:nth-child(6) a { transition-delay: 0.62s; }
   .store-cta__media img { aspect-ratio: auto; }
   .custom__row { grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
   .custom__row li:nth-child(2) {
-    border-left: 1px solid var(--line-dim);
-    border-right: 1px solid var(--line-dim);
+    border-left: 1px solid rgba(230, 198, 140, 0.22);
+    border-right: 1px solid rgba(230, 198, 140, 0.22);
   }
 }
 
