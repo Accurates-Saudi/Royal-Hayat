@@ -469,7 +469,7 @@ body.nav-open .site-nav li:nth-child(6) a { transition-delay: 0.62s; }
   justify-content: flex-end;
   align-items: center;
   padding: 0 var(--gutter) clamp(5.5rem, 12vh, 8rem);
-  background: url("../assets/rhero.jpg") 46.5% center / cover no-repeat #16120e;
+  background: url("https://cdn.jsdelivr.net/gh/Accurates-Saudi/Royal-Hayat@main/assets/rhero.jpg") 46.5% center / cover no-repeat #16120e;
 }
 /* top scrim — keeps the header legible over the photo */
 .hero::before {
@@ -585,7 +585,7 @@ body.nav-open .site-nav li:nth-child(6) a { transition-delay: 0.62s; }
   right: -8%;
   width: clamp(14rem, 32vw, 24rem);
   aspect-ratio: 2 / 3;
-  background: url("../assets/logo royal hayat.png") center / contain no-repeat;
+  background: url("https://cdn.jsdelivr.net/gh/Accurates-Saudi/Royal-Hayat@main/assets/logo%20royal%20hayat.png") center / contain no-repeat;
   opacity: 0.05;
   pointer-events: none;
 }
@@ -859,7 +859,7 @@ body.nav-open .site-nav li:nth-child(6) a { transition-delay: 0.62s; }
 
 /* ============================================================
    IMAGE INTERLUDE — full-bleed photo band, same idea as the
-   hero. Background: assets/bg2.jpg
+   hero. Background served from CDN.
    ============================================================ */
 .interlude {
   margin-top: var(--section-gap);
@@ -870,7 +870,7 @@ body.nav-open .site-nav li:nth-child(6) a { transition-delay: 0.62s; }
   text-align: center;
   background:
     linear-gradient(rgba(22, 16, 9, 0.42), rgba(22, 16, 9, 0.42)),
-    url("../assets/bg2.jpg") center / cover no-repeat,
+    url("https://cdn.jsdelivr.net/gh/Accurates-Saudi/Royal-Hayat@main/assets/bg2.jpg") center / cover no-repeat,
     #1c1610;
 }
 .interlude__line {
@@ -923,7 +923,7 @@ body.nav-open .site-nav li:nth-child(6) a { transition-delay: 0.62s; }
 }
 
 /* ============================================================
-   REVIEWS — full-bleed photo band (assets/bg3.jpg), review
+   REVIEWS — full-bleed photo band (CDN), review
    cards float on top like panels on the counter
    ============================================================ */
 .reviews {
@@ -931,7 +931,7 @@ body.nav-open .site-nav li:nth-child(6) a { transition-delay: 0.62s; }
   padding: clamp(4rem, 10vw, 7rem) 0;
   background:
     linear-gradient(rgba(22, 16, 9, 0.6), rgba(22, 16, 9, 0.6)),
-    url("../assets/bg3.jpg") center / cover no-repeat,
+    url("https://cdn.jsdelivr.net/gh/Accurates-Saudi/Royal-Hayat@main/assets/bg3.jpg") center / cover no-repeat,
     #1c1610;
 }
 .reviews .section-head { margin-bottom: clamp(2.4rem, 6vw, 3.5rem); }
@@ -1044,7 +1044,7 @@ body.nav-open .site-nav li:nth-child(6) a { transition-delay: 0.62s; }
   left: -7%;
   width: clamp(12rem, 28vw, 21rem);
   aspect-ratio: 2 / 3;
-  background: url("../assets/logo royal hayat.png") center / contain no-repeat;
+  background: url("https://cdn.jsdelivr.net/gh/Accurates-Saudi/Royal-Hayat@main/assets/logo%20royal%20hayat.png") center / contain no-repeat;
   opacity: 0.045;
   pointer-events: none;
 }
